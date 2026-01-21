@@ -135,3 +135,12 @@ JOIN Orders o ON s.ShipperId = o.shipperId
 JOIN OrderDetails od ON o.orderID = od.OrderID
 WHERE o.ShippedDate IS NOT NULL
 GROUP BY s.CompanyName;
+
+-- 16. Which shipper has bagged most orders. Get the shipper's id, name and the number of orders.
+
+SELECT TOP 1 s.CompanyName AS ShipperName, COUNT(o.OrderID) AS NoOfOrders
+FROM Orders o
+JOIN Shippers s ON o.ShipperID = s.ShipperID
+WHERE o.ShippedDate IS NOT NULL
+GROUP BY s.CompanyName
+ORDER BY NoOfOrders DESC;
