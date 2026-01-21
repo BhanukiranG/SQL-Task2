@@ -81,3 +81,11 @@ JOIN Orders o ON o.OrderID = od.OrderID
 WHERE o.ShippedDate IS NOT NULL
 GROUP BY p.ProductID, p.ProductName
 ORDER BY NoOfShipments ASC;
+
+-- 10. What is the total price that is to be paid by Laura Callahan for the order placed on 13th of January,1997
+
+SELECT SUM(od.UnitPrice * od.Quantity * (1 - od.Discount)) AS TotalPrice
+FROM Employees e
+JOIN Orders o ON e.EmployeeID = o.EmployeeID
+JOIN OrderDetails od ON od.OrderID = o.OrderID
+WHERE e.FirstName = 'Laura' AND e.LastName = 'Callahan' AND o.orderDate = '1997-01-13';
