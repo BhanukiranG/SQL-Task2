@@ -63,3 +63,11 @@ SELECT e.EmployeeID, e.FirstName + ' ' + e.LastName AS EmployeeName, e.HomePhone
 FROM Employees e
 JOIN Orders o ON e.EmployeeId = o.EmployeeId
 WHERE o.OrderDate BETWEEN '1997-01-13' AND '1997-04-16';
+
+-- 8. Which product received the most orders. Get the product's ID and Name and number of orders it received.
+
+SELECT TOP 1 p.productId, p.productName, COUNT(od.OrderId) AS NoOfOrders
+FROM OrderDetails od
+JOIN Products p ON p.ProductId = od.ProductId
+GROUP BY p.productId, p.productName
+ORDER BY NoOfOrders DESC;
