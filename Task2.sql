@@ -56,3 +56,10 @@ FROM Employees e
 JOIN Orders o ON e.EmployeeId = o.EmployeeId
 JOIN OrderDetails od ON o.OrderId = od.OrderId
 WHERE e.FirstName = 'Robert' AND e.LastName = 'King' AND o.OrderDate BETWEEN '1996-08-15' AND '1997-08-15';
+
+-- 7. I want to make a phone call to the employees to wish them on the occasion of Christmas who placed orders between 13th of January,1997 and 16th of April,1997. I want the EmployeeID, Employee Full Name, HomePhone Number.
+
+SELECT e.EmployeeID, e.FirstName + ' ' + e.LastName AS EmployeeName, e.HomePhone
+FROM Employees e
+JOIN Orders o ON e.EmployeeId = o.EmployeeId
+WHERE o.OrderDate BETWEEN '1997-01-13' AND '1997-04-16';
