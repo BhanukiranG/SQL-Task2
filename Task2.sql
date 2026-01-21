@@ -48,3 +48,11 @@ SELECT COUNT(o.OrderId) AS NoOfOrdersByRobertKing
 FROM Employees e
 JOIN Orders o ON e.EmployeeID = o.EmployeeID
 WHERE e.FirstName = 'Robert' AND e.LastName = 'King';
+
+-- 6. How many products have been ordered by Robert King between 15th August,1996 and 15th August,1997
+
+SELECT SUM(od.Quantity) AS TotalProductsOrderByRobertKing
+FROM Employees e
+JOIN Orders o ON e.EmployeeId = o.EmployeeId
+JOIN OrderDetails od ON o.OrderId = od.OrderId
+WHERE e.FirstName = 'Robert' AND e.LastName = 'King' AND o.OrderDate BETWEEN '1996-08-15' AND '1997-08-15';
