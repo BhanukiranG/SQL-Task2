@@ -108,3 +108,13 @@ JOIN Products p ON p.ProductId = od.ProductId
 WHERE p.ProductName = 'Tofu' AND o.OrderDate >= '1997-01-13' AND o.OrderDate < '1997-01-31';
 
 -- 13. What is the age of the employees in days, months and years who placed orders during the month of August. Get employeeID and full name as well
+
+SELECT DISTINCT
+    e.EmployeeID,
+    e.FirstName + ' ' + e.LastName AS EmployeeName,
+    DATEDIFF(DAY, e.BirthDate, GETDATE()) AS AgeInDays,
+    DATEDIFF(MONTH, e.BirthDate, GETDATE()) AS AgeInMonths,
+    DATEDIFF(YEAR, e.BirthDate, GETDATE()) AS AgeInYears
+FROM Employees e
+JOIN Orders o ON e.EmployeeId = o.EmployeeId
+WHERE MONTH(o.OrderDate) = 8;
