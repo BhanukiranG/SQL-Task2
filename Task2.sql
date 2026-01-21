@@ -163,3 +163,11 @@ FROM Employees e
 LEFT JOIN Orders o ON e.EmployeeID = o.EmployeeID AND o.OrderDate = '1997-04-04'
 LEFT JOIN OrderDetails od ON o.OrderID = od.OrderID
 WHERE od.OrderID IS NULL;
+
+-- 19. How many products where shipped to Steven Buchanan
+
+SELECT SUM(od.Quantity) AS NoOfProducts
+FROM Employees e
+JOIN Orders o ON e.EmployeeID = o.EmployeeID
+JOIN OrderDetails od ON o.OrderId = od.OrderId
+WHERE e.FirstName = 'Steven' AND e.LastName = 'Buchanan' AND o.ShippedDate IS NOT NULL;
