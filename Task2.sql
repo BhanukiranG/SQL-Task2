@@ -41,3 +41,10 @@ FROM Employees e
 JOIN Orders o ON e.EmployeeID = o.EmployeeID
 JOIN OrderDetails od ON o.OrderID = od.OrderID
 WHERE e.FirstName = 'Anne' AND e.LastName = 'Dodsworth' AND o.OrderDate BETWEEN '1997-01-13' AND '1997-04-16';
+
+-- 5. How many orders have been placed in total by Robert King
+
+SELECT COUNT(o.OrderId) AS NoOfOrdersByRobertKing
+FROM Employees e
+JOIN Orders o ON e.EmployeeID = o.EmployeeID
+WHERE e.FirstName = 'Robert' AND e.LastName = 'King';
