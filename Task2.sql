@@ -126,3 +126,12 @@ FROM Orders o
 JOIN Shippers s ON o.ShipperID = s.ShipperID
 WHERE o.ShippedDate IS NOT NULL
 GROUP BY s.CompanyName;
+
+-- 15. Get the all shipper's name and the number of products they shipped.
+
+SELECT s.CompanyName AS ShipperName, SUM(od.Quantity) AS NoOfProductsShipped
+FROM Shippers s
+JOIN Orders o ON s.ShipperId = o.shipperId
+JOIN OrderDetails od ON o.orderID = od.OrderID
+WHERE o.ShippedDate IS NOT NULL
+GROUP BY s.CompanyName;
