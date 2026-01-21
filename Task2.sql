@@ -35,3 +35,9 @@ JOIN OrderDetails od ON o.OrderID = od.OrderID
 WHERE o.OrderDate BETWEEN '1997-01-13' AND '1997-04-16';
 
 -- 4. What is the total quantity of products for which Anne Dodsworth placed orders between 13th of January,1997 and 16th of April,1997.
+
+SELECT SUM(od.Quantity) As TotalOrdersByAnneDodsworth
+FROM Employees e
+JOIN Orders o ON e.EmployeeID = o.EmployeeID
+JOIN OrderDetails od ON o.OrderID = od.OrderID
+WHERE e.FirstName = 'Anne' AND e.LastName = 'Dodsworth' AND o.OrderDate BETWEEN '1997-01-13' AND '1997-04-16';
