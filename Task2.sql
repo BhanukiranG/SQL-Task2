@@ -144,3 +144,14 @@ JOIN Shippers s ON o.ShipperID = s.ShipperID
 WHERE o.ShippedDate IS NOT NULL
 GROUP BY s.CompanyName
 ORDER BY NoOfOrders DESC;
+
+-- 17. Which shipper supplied the most number of products between 10th August,1996 and 20th
+-- September,1998. Get the shipper's name and the number of products.
+
+SELECT TOP 1 s.CompanyName AS ShipperName, SUM(od.Quantity) AS NoOfProductsShipped
+FROM Shippers s
+JOIN Orders o ON s.ShipperId = o.shipperId
+JOIN OrderDetails od ON o.orderID = od.OrderID
+WHERE o.ShippedDate IS NOT NULL AND o.OrderDate >= '1996-08-10' AND o.OrderDate < '1998-09-21'
+GROUP BY s.CompanyName
+ORDER BY NoOfProductsShipped DESC;
