@@ -71,3 +71,13 @@ FROM OrderDetails od
 JOIN Products p ON p.ProductId = od.ProductId
 GROUP BY p.productId, p.productName
 ORDER BY NoOfOrders DESC;
+
+-- 9. Which are the least shipped products. List only the top 5 from your list.
+
+SELECT TOP 5 p.ProductID, p.ProductName, COUNT(DISTINCT od.OrderID) AS NoOfShipments
+FROM Products p
+JOIN OrderDetails od ON p.ProductID = od.ProductID
+JOIN Orders o ON o.OrderID = od.OrderID
+WHERE o.ShippedDate IS NOT NULL
+GROUP BY p.ProductID, p.ProductName
+ORDER BY NoOfShipments ASC;
