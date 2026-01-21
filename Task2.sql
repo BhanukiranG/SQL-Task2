@@ -97,3 +97,12 @@ FROM Orders o
 JOIN OrderDetails od ON o.OrderID = od.OrderID
 JOIN Products p ON p.ProductID = od.ProductID
 WHERE p.ProductName In ('Gorgonzola Telino','Gnocchi di nonna Alice','Raclette Courdavault','Camembert Pierrot') AND o.OrderDate BETWEEN '1997-01-01' AND '1997-01-31';
+
+-- 12. What is the full name of the employees who ordered Tofu between 13th of January,1997 and 30th of January,1997
+
+SELECT DISTINCT e.FirstName + ' ' + e.LastName AS FullName
+FROM Employees e
+JOIN Orders o ON o.EmployeeID = e.EmployeeID
+JOIN OrderDetails od ON o.OrderId = od.OrderId
+JOIN Products p ON p.ProductId = od.ProductId
+WHERE p.ProductName = 'Tofu' AND o.OrderDate >= '1997-01-13' AND o.OrderDate <  '1997-01-31';
