@@ -118,3 +118,11 @@ SELECT DISTINCT
 FROM Employees e
 JOIN Orders o ON e.EmployeeId = o.EmployeeId
 WHERE MONTH(o.OrderDate) = 8;
+
+-- 14. Get all the shipper's name and the number of orders they shipped
+
+SELECT s.CompanyName AS ShipperName, COUNT(o.OrderID) AS NoOfOrders
+FROM Orders o
+JOIN Shippers s ON o.ShipperID = s.ShipperID
+WHERE o.ShippedDate IS NOT NULL
+GROUP BY s.CompanyName;
