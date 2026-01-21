@@ -89,3 +89,11 @@ FROM Employees e
 JOIN Orders o ON e.EmployeeID = o.EmployeeID
 JOIN OrderDetails od ON od.OrderID = o.OrderID
 WHERE e.FirstName = 'Laura' AND e.LastName = 'Callahan' AND o.orderDate = '1997-01-13';
+
+-- 11. How many number of unique employees placed orders for Gorgonzola Telino or Gnocchi di nonna Alice or Raclette Courdavault or Camembert Pierrot in the month January,1997
+
+SELECT DISTINCT COUNT( o.EmployeeId) AS UniqueEmps
+FROM Orders o
+JOIN OrderDetails od ON o.OrderID = od.OrderID
+JOIN Products p ON p.ProductID = od.ProductID
+WHERE p.ProductName In ('Gorgonzola Telino','Gnocchi di nonna Alice','Raclette Courdavault','Camembert Pierrot') AND o.OrderDate BETWEEN '1997-01-01' AND '1997-01-31';
