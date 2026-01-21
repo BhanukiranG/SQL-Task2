@@ -155,3 +155,11 @@ JOIN OrderDetails od ON o.orderID = od.OrderID
 WHERE o.ShippedDate IS NOT NULL AND o.OrderDate >= '1996-08-10' AND o.OrderDate < '1998-09-21'
 GROUP BY s.CompanyName
 ORDER BY NoOfProductsShipped DESC;
+
+-- 18. Which employee didn't order any product 4th of April 1997
+
+SELECT *
+FROM Employees e
+LEFT JOIN Orders o ON e.EmployeeID = o.EmployeeID AND o.OrderDate = '1997-04-04'
+LEFT JOIN OrderDetails od ON o.OrderID = od.OrderID
+WHERE od.OrderID IS NULL;
