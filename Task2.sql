@@ -171,3 +171,11 @@ FROM Employees e
 JOIN Orders o ON e.EmployeeID = o.EmployeeID
 JOIN OrderDetails od ON o.OrderId = od.OrderId
 WHERE e.FirstName = 'Steven' AND e.LastName = 'Buchanan' AND o.ShippedDate IS NOT NULL;
+
+-- 20. How many orders where shipped to Michael Suyama by Federal Shipping
+
+SELECT COUNT(o.OrderId) AS NoOfOrdersShipped
+FROM Employees e
+JOIN Orders o ON e.EmployeeId = o.EmployeeId
+JOIN Shippers s ON o.ShipperID = s.ShipperID
+WHERE e.FirstName = 'Michael' AND e.LastName = 'Suyama' AND s.CompanyName = 'Federal Shipping' AND o.ShippedDate IS NOT NULL;
