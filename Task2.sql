@@ -216,3 +216,29 @@ LEFT JOIN OrderDetails od ON o.OrderId = od.OrderId
 LEFT JOIN Products p ON od.ProductID = p.ProductID
 LEFT JOIN Suppliers sp ON p.supplierID = sp.supplierID AND sp.CompanyName = 'Ma Maison'
 WHERE sp.supplierId IS NULL;
+
+-- 25. Which shipper shipped the least number of products for the month of September and October,1997 combined.
+
+SELECT TOP 1
+    s.ShipperID,
+    s.CompanyName AS ShipperName,
+    SUM(od.Quantity) AS TotalProductsShipped
+FROM Shippers s
+JOIN Orders o ON s.ShipperID = o.ShipperID
+JOIN OrderDetails od ON o.OrderID = od.OrderID
+WHERE o.ShippedDate IS NOT NULL AND o.ShippedDate BETWEEN '1997-09-01' AND '1997-10-31'
+GROUP BY s.ShipperID,s.CompanyName
+ORDER BY TotalProductsShipped ASC;
+
+
+SELECT * FROM Employees;
+
+SELECT * FROM Orders;
+
+SELECT * FROM OrderDetails;
+
+SELECT * FROM Products;
+
+SELECT * FROM Suppliers;
+
+SELECT * FROM Shippers;
