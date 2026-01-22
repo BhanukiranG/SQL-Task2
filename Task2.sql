@@ -230,6 +230,14 @@ WHERE o.ShippedDate IS NOT NULL AND o.ShippedDate BETWEEN '1997-09-01' AND '1997
 GROUP BY s.ShipperID,s.CompanyName
 ORDER BY TotalProductsShipped ASC;
 
+-- 26. What are the products that weren't shipped at all in the month of August, 1997
+
+SELECT DISTINCT p.ProductName
+FROM Products p
+LEFT JOIN OrderDetails od ON p.ProductID = od.ProductID
+LEFT JOIN Orders o ON o.OrderID = od.OrderID AND o.ShippedDate BETWEEN '1997-08-01' AND '1997-08-31'
+WHERE o.OrderID IS NULL;
+
 
 SELECT * FROM Employees;
 
