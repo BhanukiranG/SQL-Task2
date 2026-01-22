@@ -179,3 +179,12 @@ FROM Employees e
 JOIN Orders o ON e.EmployeeId = o.EmployeeId
 JOIN Shippers s ON o.ShipperID = s.ShipperID
 WHERE e.FirstName = 'Michael' AND e.LastName = 'Suyama' AND s.CompanyName = 'Federal Shipping' AND o.ShippedDate IS NOT NULL;
+
+-- 21. How many orders are placed for the products supplied from UK and Germany
+
+SELECT COUNT(DISTINCT o.OrderId) AS NoOfOrdersPlaced
+FROM Orders o
+JOIN OrderDetails od ON o.orderid = od.orderid
+JOIN Products p ON od.productid = p.productid
+JOIN Suppliers sp ON p.supplierid = sp.supplierid
+WHERE sp.Country IN ('UK', 'Germany');
