@@ -197,3 +197,12 @@ JOIN OrderDetails od ON o.OrderId = od.OrderId
 JOIN Products p ON od.ProductID = p.ProductID
 JOIN Suppliers sp ON p.supplierID = sp.supplierID
 WHERE sp.CompanyName = 'Exotic Liquids' AND o.OrderDate BETWEEN '1997-01-01' AND '1997-01-31';
+
+-- 23. In which days of January, 1997, the supplier Tokyo Traders haven't received any orders.
+
+SELECT DISTINCT o.OrderDate AS NotReceivedOrders
+FROM Orders o
+LEFT JOIN OrderDetails od ON o.OrderId = od.OrderId
+LEFT JOIN Products p ON od.ProductID = p.ProductID
+LEFT JOIN Suppliers sp ON p.supplierID = sp.supplierID AND sp.CompanyName = 'Tokyo Traders'
+WHERE o.OrderDate BETWEEN '1997-01-01' AND '1997-01-31' AND sp.supplierId IS NULL;
