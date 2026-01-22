@@ -206,3 +206,13 @@ LEFT JOIN OrderDetails od ON o.OrderId = od.OrderId
 LEFT JOIN Products p ON od.ProductID = p.ProductID
 LEFT JOIN Suppliers sp ON p.supplierID = sp.supplierID AND sp.CompanyName = 'Tokyo Traders'
 WHERE o.OrderDate BETWEEN '1997-01-01' AND '1997-01-31' AND sp.supplierId IS NULL;
+
+-- 24. Which of the employees did not place any order for the products supplied by Ma Maison in the month of May
+
+SELECT DISTINCT e.FirstName + ' ' + e.LastName AS EmployeeNames
+FROM Employees e
+LEFT JOIN Orders o ON e.EmployeeId = o.EmployeeId AND o.OrderDate BETWEEN '1997-05-01' AND '1997-05-31'
+LEFT JOIN OrderDetails od ON o.OrderId = od.OrderId
+LEFT JOIN Products p ON od.ProductID = p.ProductID
+LEFT JOIN Suppliers sp ON p.supplierID = sp.supplierID AND sp.CompanyName = 'Ma Maison'
+WHERE sp.supplierId IS NULL;
