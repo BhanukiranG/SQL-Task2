@@ -188,3 +188,12 @@ JOIN OrderDetails od ON o.orderid = od.orderid
 JOIN Products p ON od.productid = p.productid
 JOIN Suppliers sp ON p.supplierid = sp.supplierid
 WHERE sp.Country IN ('UK', 'Germany');
+
+-- 22. How much amount Exotic Liquids received due to the order placed for its products in the month of January,1997
+
+SELECT SUM(od.UnitPrice * od.Quantity * (1 - od.Discount)) AS Amount
+FROM Orders o
+JOIN OrderDetails od ON o.OrderId = od.OrderId
+JOIN Products p ON od.ProductID = p.ProductID
+JOIN Suppliers sp ON p.supplierID = sp.supplierID
+WHERE sp.CompanyName = 'Exotic Liquids' AND o.OrderDate BETWEEN '1997-01-01' AND '1997-01-31';
